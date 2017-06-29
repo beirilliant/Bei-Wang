@@ -40,21 +40,26 @@
     #playarea {
       height:80%;
       margin-top: 20px;
+      background-color: black;
+      z-index: 2;
     }
     #square {
       height: 300px;
       width: 300px;
-      background-color: black;
+
     }
     #hiddenLetter {
-      font-size: 1000%;
+      font-size: 1500%;
       color: black;
     }
     #circle {
+      position:absolute;
       height:150px;
       width:150px;
       border-radius: 50%;
-      background-color: white;
+      background-color: #FFEF73;
+      opacity: 1;
+      z-index: -1;
     }
 
     </style>
@@ -62,7 +67,7 @@
   <body>
     <div class="container-fluid text-center" id="main">
       <div class="container rounded" id="topbar">
-        <h1 class="font-weight-bold">Find the hidden letter<small class="text-muted"> By Bei Wang <small>(Ver 0.1)</small></small><h1>
+        <h1 class="font-weight-bold">Find the hidden letter<small class="text-muted"> By Bei Wang <small>(Ver 0.2)</small></small><h1>
         </div>
         <div class="row mw-80" id="middle">
         <div class="col col-xl-2">
@@ -75,15 +80,14 @@
         </div>
         <div class="col col-xl-8">
           <div class="container" id="countdown">
-            <p>count down 2min<label class="btn btn-primary pull-right">Start</label></p>
+            <p>count down 2min<label class="btn btn-primary pull-right" id="start">Start</label></p>
           </div>
               <div class="container" id="playarea">
                 Playarea
                 <div id="square">
                   <p id="hiddenLetter">T</p>
                   <div id="circle">
-
-                </div>
+                  </div>
               </div>
         </div>
       </div>
@@ -97,6 +101,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script type="text/javascript">
+    function moveCircle() {
+      var x = Math.floor(Math.random() * 200);
+      var y = Math.floor(Math.random() * 200);
+      $("#circle").animate({
+        top: x,
+        left: y
+      }, "400", function() {
+        moveCircle();
+   });
+
+ }
+
+  $("#start").click(function() {
+    moveCircle();
+  });
 
     </script>
   </body>
