@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+    html {
+      background-color: #eee;
+    }
+    div {
+      border: 1px solid black;
+    }
+    #main {
+      height: 900px;
+      margin-top: 20px;
+      background-color: #ddd;
+    }
+    #middle {
+      height: 80%;
+    }
+    #results {
+      height: 20%;
+      margin-top: 20px;
+      padding: 20px;
+    }
+    #top3 {
+      height: 70%;
+      margin-top: 20px;
+      padding: 20px;
+    }
+    #countdown {
+      height: 10%;
+      margin-top: 20px;
+    }
+    #playarea {
+      height:80%;
+      margin-top: 20px;
+    }
+    #square {
+      height: 300px;
+      width: 300px;
+      background-color: black;
+    }
+    #hiddenLetter {
+      font-size: 1000%;
+      color: black;
+    }
+    #circle {
+      height:150px;
+      width:150px;
+      border-radius: 50%;
+      background-color: white;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid text-center" id="main">
+      <div class="container rounded" id="topbar">
+        <h1 class="font-weight-bold">Find the hidden letter<small class="text-muted"> By Bei Wang <small>(Ver 0.1)</small></small><h1>
+        </div>
+        <div class="row mw-80" id="middle">
+        <div class="col col-xl-2">
+          <div class="container" id="results">
+          <p>Your score:</p>
+        </div>
+        <div class="container" id="top3">
+          Top 3
+        </div>
+        </div>
+        <div class="col col-xl-8">
+          <div class="container" id="countdown">
+            <p>count down 2min<label class="btn btn-primary pull-right">Start</label></p>
+          </div>
+              <div class="container" id="playarea">
+                Playarea
+                <div id="square">
+                  <p id="hiddenLetter">T</p>
+                  <div id="circle">
+
+                </div>
+              </div>
+        </div>
+      </div>
+        <div class="col col-xl-2">
+          <img src="./smileyface.gif">
+        </div>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+    </script>
+  </body>
+</html>
