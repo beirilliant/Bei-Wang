@@ -112,8 +112,16 @@
    });
 
  }
-
+   function randomLetter () {
+     var i = Math.floor(Math.random() * 26 + 65);
+     var j = Math.floor(Math.random() * 26 + 97);
+     var array = [i, j];
+     var pick = array[Math.round(Math.random())];
+     var letter = String.fromCharCode(pick);
+     $("#hiddenLetter").html(letter);
+   }
   $("#start").click(function() {
+    randomLetter();
     moveCircle();
   });
 
