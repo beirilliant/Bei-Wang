@@ -101,6 +101,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script type="text/javascript">
+    var pick;
     function moveCircle() {
       var x = Math.floor(Math.random() * 200);
       var y = Math.floor(Math.random() * 200);
@@ -112,18 +113,29 @@
    });
 
  }
-   function randomLetter () {
-     var i = Math.floor(Math.random() * 26 + 65);
-     var j = Math.floor(Math.random() * 26 + 97);
-     var array = [i, j];
-     var pick = array[Math.round(Math.random())];
-     var letter = String.fromCharCode(pick);
-     $("#hiddenLetter").html(letter);
-   }
+
   $("#start").click(function() {
-    randomLetter();
-    moveCircle();
+      var i = Math.floor(Math.random() * 26 + 65);
+      var j = Math.floor(Math.random() * 26 + 97);
+      var array = [i, j];
+      pick = array[Math.round(Math.random())];
+      var letter = String.fromCharCode(pick);
+      $("#hiddenLetter").html(letter);
+      moveCircle();
   });
+
+  $(document).keydown(function(e){
+    if (e.keyCode == pick || e.keyCode == pick + 32) {
+      console.log(e.keyCode);
+      console.log(pick);
+    alert("You are good");
+  }
+    else {
+      console.log(e.keyCode);
+      console.log(pick);
+      alert("Try again");
+    }
+});
 
     </script>
   </body>
