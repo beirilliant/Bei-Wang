@@ -47,6 +47,7 @@
       height: 300px;
       width: 300px;
       position: absolute;
+      border: none;
     }
     #hiddenLetter {
       font-size: 1500%;
@@ -54,8 +55,8 @@
     }
     #circle {
       position:absolute;
-      height:150px;
-      width:150px;
+      height:180px;
+      width:180px;
       border-radius: 50%;
       background-color: #FFEF73;
       opacity: 1;
@@ -64,9 +65,24 @@
     #scoreResult {
       font-size: 200%;
     }
+    img {
+      margin-top: 150px;
+      width:250px;
+      height: 250px;
+    }
+    #countdown {
+      padding: 15px;
+    }
+    #timer {
+      font-size: 200%;
+    }
+    #start {
+      margin-right: 10px;
+    }
 
     </style>
   </head>
+
   <body>
     <div class="container-fluid text-center" id="main">
       <div class="container rounded" id="topbar">
@@ -75,7 +91,7 @@
         <div class="row mw-80" id="middle">
         <div class="col col-xl-2">
           <div class="container" id="results">
-          <p>Your score:</p>
+          <p class="text-muted font-weight-bold">Your score:</p>
           <p class="text-primary" id="scoreResult">0</p>
         </div>
         <div class="container" id="top3">
@@ -84,10 +100,9 @@
         </div>
         <div class="col col-xl-8">
           <div class="container" id="countdown">
-            <p>count down 2min<label class="btn btn-primary pull-right" id="start">Start</label></p>
+            <p><span id="timer" class="text-danger font-weight-bold">Timer: 60s</span><button class="btn btn-danger pull-right" id="stop">STOP</button><button class="btn btn-success pull-right" id="start">START</button></p>
           </div>
               <div class="container" id="playarea">
-                Playarea
                 <div id="square">
                   <p id="hiddenLetter"></p>
                   <div id="circle">
@@ -95,7 +110,7 @@
               </div>
         </div>
       </div>
-        <div class="col col-xl-2">
+        <div class="col col-xl-2" id="imgSection">
           <img src="./smileyface.gif">
         </div>
     </div>
@@ -107,7 +122,11 @@
     <script type="text/javascript">
     var pick;
     var score = 0;
+    var stop = false;
     function moveCircle() {
+      if (stop) {
+        return;
+      } else {
       var x = Math.floor(Math.random() * 200);
       var y = Math.floor(Math.random() * 200);
       $("#circle").animate({
@@ -116,6 +135,7 @@
       }, "400", function() {
         moveCircle();
    });
+  }
  }
    var array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
    function randamLetter () {
@@ -124,39 +144,74 @@
    return pick;
  }
   $("#start").click(function() {
+    $("#start").prop("disabled", true);
+    $("#imgSection").html('<img src="./smileyface.gif">');
+    score = 0;
+    $("#scoreResult").html(score);
+    stop = false;
+
+
+    var count = 60;
+    var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+    $("#timer").html("Timer: " + count + "s");
+    function timer() {
+      if (stop) {
+        count = 60;
+        return;
+      } else {
+    count--;
+    $("#timer").html("Timer: " + count + "s");
+    if (count <= 0) {
+       clearInterval(counter);
+       stop = true;
+       $("#start").prop("disabled", false);
+       return;
+    }
+  }
+    //Do code for showing the number of seconds here
+  }
+
       moveCircle();
       randamLetter();
+
+     if ($(document).keydown() && stop !== true) {
+      $(document).keydown(function(e){
+      if (String.fromCharCode(e.keyCode) == pick || String.fromCharCode(e.keyCode + 32) == pick) {
+         console.log(String.fromCharCode(e.keyCode));
+         console.log(pick);
+         $("#hiddenLetter").css({"display": "none"});
+         $("#scoreResult").html(++score);
+         $("#imgSection").html('<img src="./smileyface.gif">');
+         function moveSquare() {
+           var i = Math.floor(Math.random() * 100);
+           var j = Math.floor(Math.random() * 800);
+           $("#square").animate({
+              top: i,
+              left: j
+              }, "10", function() {
+                 $("#hiddenLetter").css({"display": "initial"});
+          });
+         }
+
+         moveSquare();
+         randamLetter ();
+       } else {
+         console.log(String.fromCharCode(e.keyCode));
+         console.log(pick);
+         $("#imgSection").html('<img src="./cryface.gif">');
+       }
+     });
+    }
+    else if (stop) {
+      return;
+    }
   });
 
-if ($(document).keydown()) {
-  $(document).keydown(function(e){
-    if (String.fromCharCode(e.keyCode) == pick || String.fromCharCode(e.keyCode + 32) == pick) {
-      console.log(String.fromCharCode(e.keyCode));
-      console.log(pick);
-      $("#hiddenLetter").css({"display": "none"});
-      $("#scoreResult").html(++score);
-      function moveSquare() {
-        var i = Math.floor(Math.random() * 500);
-        var j = Math.floor(Math.random() * 500);
-        $("#square").animate({
-          top: i,
-          left: j
-        }, "10", function() {
-            $("#hiddenLetter").css({"display": "initial"});
-        });
-
-      }
-      moveSquare();
-      randamLetter ();
-
-}
-    else {
-      console.log(String.fromCharCode(e.keyCode));
-      console.log(pick);
-      alert("Try again");
-    }
+$("#stop").click(function() {
+  stop = true;
+  $("#start").prop("disabled", false);
 });
-}
+
 
     </script>
   </body>
