@@ -61,6 +61,7 @@
       background-color: #FFEF73;
       opacity: 1;
       z-index: -1;
+      display: none;
     }
     #scoreResult {
       font-size: 200%;
@@ -144,6 +145,7 @@
    return pick;
  }
   $("#start").click(function() {
+    $("#circle").css("display", "initial");
     $("#start").prop("disabled", true);
     $("#imgSection").html('<img src="./smileyface.gif">');
     score = 0;
