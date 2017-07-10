@@ -68,6 +68,7 @@
     }
     img {
       margin-top: 150px;
+      margin-left: 20px;
       width:250px;
       height: 250px;
     }
@@ -80,6 +81,12 @@
     #start {
       margin-right: 10px;
     }
+    #cry {
+      display: none;
+    }
+    #smile {
+      display: block;
+    }
 
     </style>
   </head>
@@ -87,7 +94,7 @@
   <body>
     <div class="container-fluid text-center" id="main">
       <div class="container rounded" id="topbar">
-        <h1 class="font-weight-bold">Find the hidden letter<small class="text-muted"> By Bei Wang <small>(Ver 0.2)</small></small><h1>
+        <h1 class="font-weight-bold">Find the hidden letter<small class="text-muted"> By Bei Wang <small>(Ver 0.5)</small></small><h1>
         </div>
         <div class="row mw-80" id="middle">
         <div class="col col-xl-2">
@@ -112,7 +119,8 @@
         </div>
       </div>
         <div class="col col-xl-2" id="imgSection">
-          <img src="./smileyface.gif">
+          <img id="smile" src="./smileyface.gif">
+          <img id="cry" src="./cryface.gif">
         </div>
     </div>
 
@@ -147,7 +155,7 @@
   $("#start").click(function() {
     $("#circle").css("display", "initial");
     $("#start").prop("disabled", true);
-    $("#imgSection").html('<img src="./smileyface.gif">');
+    $("#smile").css("display", "block");
     score = 0;
     $("#scoreResult").html(score);
     stop = false;
@@ -174,16 +182,19 @@
   }
 
       moveCircle();
-      randamLetter();
+  randamLetter();
 
      if ($(document).keydown() && stop !== true) {
+
+
       $(document).keydown(function(e){
       if (String.fromCharCode(e.keyCode) == pick || String.fromCharCode(e.keyCode + 32) == pick) {
          console.log(String.fromCharCode(e.keyCode));
          console.log(pick);
          $("#hiddenLetter").css({"display": "none"});
          $("#scoreResult").html(++score);
-         $("#imgSection").html('<img src="./smileyface.gif">');
+         $("#smile").css("display", "block");
+         $("#cry").css("display", "none");
          function moveSquare() {
            var i = Math.floor(Math.random() * 100);
            var j = Math.floor(Math.random() * 800);
@@ -196,23 +207,31 @@
          }
 
          moveSquare();
-         randamLetter ();
+         randamLetter();
        } else {
          console.log(String.fromCharCode(e.keyCode));
          console.log(pick);
-         $("#imgSection").html('<img src="./cryface.gif">');
+         $("#cry").css("display", "block");
+         $("#smile").css("display", "none");
        }
+
      });
     }
-    else if (stop) {
+    if (stop) {
       return;
     }
+
+
+
   });
 
-$("#stop").click(function() {
-  stop = true;
-  $("#start").prop("disabled", false);
-});
+  $("#stop").click(function() {
+    stop = true;
+    $("#start").prop("disabled", false);
+    return;
+        });
+
+
 
 
     </script>
